@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %}Chuck Norris Quotes{% endblock %}
 {% block content %}
     <h1>Hello</h1>
-    <p>{{quote()}}</p>
+    <h2>Welcome to Chuck Norris Quote Generator</h2>
+    <form action="/quotegen" method="get">
+        <button type="submit" class="btn btn-info">Generate Me a Chuck</button>
+      </form>
 {% endblock %}
