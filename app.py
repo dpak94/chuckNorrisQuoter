@@ -1,5 +1,9 @@
-import requests, json
-from flask import Flask, url_for, render_template, redirect
+import requests
+import json
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
 
 def quoteFunc():
     url = 'https://api.chucknorris.io/jokes/random'
@@ -8,14 +12,19 @@ def quoteFunc():
     quote = norris_json['value']
     return quote
 
-app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html', quote = quoteFunc)
+    return render_template('index.html')
 
 
-
+@app.route('/quotegen', methods=['POST', 'GET'])
+def generator():
+    if request.method == 'GET':
+        return render_template('quote.html', quote=quoteFunc())
+    else:
+        return render_template('index.html')
+        
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug=True)
